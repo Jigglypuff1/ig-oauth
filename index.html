@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+  <title>Возврат в приложение</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #17212b;
+      color: #e8e8e8;
+      text-align: center;
+    }
+    h1 { font-size: 20px; margin: 0; }
+    p { margin: 0; color: #9fb0c0; font-size: 14px; line-height: 1.5; }
+    a {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 14px 22px;
+      border-radius: 10px;
+      background: #8a3ab9;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Возврат в приложение…</h1>
+  <p>Если приложение не открылось автоматически, нажмите кнопку ниже.</p>
+  <a id="open" href="nephriteshop://instagram/oauth" rel="noreferrer">Открыть приложение</a>
+
+  <script>
+    // Meta добавляет code/state или error/error_description в query.
+    // Передаём их в приложение без изменений.
+    var target = "nephriteshop://instagram/oauth" + (window.location.search || "");
+    document.getElementById("open").href = target;
+
+    // Некоторые браузеры не открывают custom scheme без действия пользователя.
+    setTimeout(function () {
+      window.location.replace(target);
+    }, 400);
+  </script>
+</body>
+</html>
